@@ -11,11 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Use docker
-      uses: actions/setup-node@v1
+    - name: Login to Docker Hub
+      run: docker login --username maciekmm --password-stdin <<< "${{ secrets.DOCKER_HUB_TOKEN }}"
     - name: Build image
       run: docker build --file Dockerfile --tag maciekmm/pypy-scientific:${GITHUB_REF##*/} .
-    - name: Login to Docker Hub
-      run: docker login --username maciekmm --password "${DOCKER_HUB_TOKEN}"
     - name: Push image
       run : docker push maciekmm/pypy-scientific:${GITHUB_REF##*/}
