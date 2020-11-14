@@ -11,6 +11,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - name: Cache multiple paths
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/cache
+          !~/cache/exclude
+          **/node_modules
+        key: ${{ runner.os }}
     - name: Login to Docker Hub
       run: docker login --username maciekmm --password-stdin <<< "${{ secrets.DOCKER_HUB_TOKEN }}"
     - name: Build image

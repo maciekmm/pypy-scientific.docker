@@ -14,4 +14,5 @@ numpy==1.19.2
 scipy==1.5.2
 psycopg2==2.8.6
 Pillow==8.0.1
+Shapely==1.7.1
 ```
